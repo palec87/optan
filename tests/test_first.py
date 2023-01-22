@@ -15,4 +15,4 @@ def test_raises():
 
 def test_examples():
     ret = load_data_example.main()
-    assert ret == 'first test'
+    assert ret == 'number one'

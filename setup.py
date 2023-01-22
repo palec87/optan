@@ -20,8 +20,8 @@ setuptools.setup(
     #     # 'Funding': '',
     #     # 'Say Thanks!': '',
     # },
-    package_dir={'': 'optan'},
-    packages=setuptools.find_packages(where='optan'),
+    package_dir={'': '.'},
+    packages=setuptools.find_packages(where='.'),
     classifiers=[
         # see https://pypi.org/classifiers/
         'Development Status :: 5 - Production/Stable',

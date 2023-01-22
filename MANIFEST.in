@@ -1,4 +1,4 @@
-include optan.toml
+include pyproject.toml
 include *.md
 include *.json
 include *.txt
