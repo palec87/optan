@@ -25,6 +25,9 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install Tox and any other packages
         run: |
+          sudo apt --fix-missing update
+          sudo apt install xvfb x11-utils libxkbcommon-x11-0
+          sudo apt install libxcb-xinerama0 pyqt5-dev-tools
           python -m pip install --upgrade pip
           pip install tox
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
