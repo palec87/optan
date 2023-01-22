@@ -20,7 +20,7 @@ setuptools.setup(
     #     # 'Funding': '',
     #     # 'Say Thanks!': '',
     # },
-    package_dir={'': 'optam'},
+    package_dir={'': 'optan'},
     packages=setuptools.find_packages(where='optan'),
     classifiers=[
         # see https://pypi.org/classifiers/
