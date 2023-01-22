@@ -1,4 +1,6 @@
 include optan.toml
 include *.md
+include *.json
 include LICENSE
 recursive-include tests test*.py
+recursive-include optan *.py
