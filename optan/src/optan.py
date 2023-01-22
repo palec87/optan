@@ -15,7 +15,7 @@ __credits__ = ['Teresa M Correia', 'Rui Guerra']
 __license__ = 'GPL'
 
 
-import tomopy
+# import tomopy
 import numpy as np
 import json
 import os
