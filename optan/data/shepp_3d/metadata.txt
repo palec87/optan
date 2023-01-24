@@ -1,0 +1,1 @@
+{"n_steps": 128, "n_sweeps": 1, "avg_per_frame": 1, "images_per_step": 1, "dynamic_range": "np.int8", "user notes": "", "sweep_start": ["15-09-42 +0000"], "sweep_finish": ["15-09-46 +0000"]}

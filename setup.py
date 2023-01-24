@@ -3,11 +3,19 @@ import setuptools
 with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
+requires = [
+    'numpy>=1.23',
+    'matplotlib>=3.2',
+    'pandas',
+    'scipy',
+]
+
 setuptools.setup(
     name='optan',
+    version="0.0.0",
     author='David Palecek',
     author_email='david@stanka.de',
-    description='Testing optan package',
+    description='OPT processing for OPTac data',
     keywords='optan, test',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -16,7 +24,7 @@ setuptools.setup(
     #     'Documentation': 'https://github.com/tomchen/example_pypi_package',
     #     'Bug Reports':
     #     'https://github.com/tomchen/example_pypi_package/issues',
-    #     'Source Code': 'https://github.com/tomchen/example_pypi_package',
+        # 'Source Code': 'https://github.com/palec87/optan',
     #     # 'Funding': '',
     #     # 'Say Thanks!': '',
     # },
@@ -24,15 +32,10 @@ setuptools.setup(
     packages=setuptools.find_packages(where='.'),
     classifiers=[
         # see https://pypi.org/classifiers/
-        'Development Status :: 5 - Production/Stable',
-
-        'Intended Audience :: Developers',
-        'Topic :: Software Development :: Build Tools',
-
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
-        'Programming Language :: Python :: 3 :: Only',
+        'Development Status :: 1 - Planning',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering :: Image Processing',
+        'Programming Language :: Python :: 3.11',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
