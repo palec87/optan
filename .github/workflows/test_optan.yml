@@ -1,36 +1,67 @@
-name: Test optan without gui
+# name: Test optan without gui
 
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+# on:
+#   push:
+#     branches:
+#       - main
+#       - master
+#   pull_request:
+#     branches:
+#       - main
+#       - master
 
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         python: ["3.11"]
+
+#     steps:
+#       - uses: actions/checkout@v3
+#       - name: Setup Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: ${{ matrix.python }}
+#       - name: Install Tox and any other packages
+#         run: |
+#           sudo apt --fix-missing update
+#           sudo apt install xvfb x11-utils libxkbcommon-x11-0
+#           sudo apt install libxcb-xinerama0 pyqt5-dev-tools
+#           python -m pip install --upgrade pip
+#           pip install tox tox-gh-actions
+#           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+#       - name: Run Tox
+#         # Run tox using the version of Python in `PATH`
+#         run: tox # -e py
+name: test
+on: [push]
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.10"]
+        python-version: ["3.11"]
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Install Tox and any other packages
-        run: |
-          sudo apt --fix-missing update
-          sudo apt install xvfb x11-utils libxkbcommon-x11-0
-          sudo apt install libxcb-xinerama0 pyqt5-dev-tools
-          python -m pip install --upgrade pip
-          pip install tox tox-gh-actions
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Run Tox
-        # Run tox using the version of Python in `PATH`
-        run: tox # -e py
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        sudo apt --fix-missing update
+        # sudo apt-get -o Acquire::Retries=3 update
+        sudo apt install xvfb x11-utils libxkbcommon-x11-0
+        sudo apt install libxcb-xinerama0 pyqt5-dev-tools
+        python -m pip install --upgrade pip
+        pip install pytest coverage pytest-qt
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test
+      env:
+        QT_DEBUG_PLUGINS: 1
+      run: |
+        ulimit -c unlimited
+        # xvfb-run --auto-servernum python -m pytest -s
+        xvfb-run --auto-servernum coverage run --source=. -m pytest .
