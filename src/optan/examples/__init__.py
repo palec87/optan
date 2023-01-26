@@ -1,4 +1,4 @@
-# from .load_data_example import main as load_data_example
+# from .load_data import main as load_data
 import types
 __all__ = [name for name, thing in globals().items()
            if not (name.startswith('_') or isinstance(thing, types.ModuleType))]

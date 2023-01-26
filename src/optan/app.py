@@ -17,9 +17,9 @@ import numpy as np
 from PIL import Image
 
 from PyQt5 import QtCore, QtWidgets
-from gui.optan_ui import Ui_MainWindow
+from .gui.optan_ui import Ui_MainWindow
 import pyqtgraph as pg
-import tomopy
+# import tomopy
 
 __author__ = 'David Palecek'
 __credits__ = ['Teresa M Correia', 'Rui Guerra']

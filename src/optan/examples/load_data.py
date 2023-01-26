@@ -13,8 +13,9 @@ import os
 import sys
 from pathlib import Path
 sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('..'))
 
-from optan.main import Optan
+from src.optan.main import Optan
 
 
 def main(show_plots=False):

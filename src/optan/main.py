@@ -15,14 +15,13 @@ __credits__ = ['Teresa M Correia', 'Rui Guerra']
 __license__ = 'GPL'
 
 
-# import tomopy
 import numpy as np
 import json
 import os
 from PIL import Image
 import matplotlib.pyplot as plt
 from skimage.transform import iradon, iradon_sart
-import cv2
+# import cv2
 import tomopy as tom
 
 

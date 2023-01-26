@@ -12,8 +12,9 @@ o.correct_axis(folder_to_process)
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('..'))
 
-from optan.main import Optan
+from src.optan.main import Optan
 
 
 def main(folder):
