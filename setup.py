@@ -1,4 +1,9 @@
+#!/usr/bin/env python3
+
 import setuptools
+from pathlib import Path
+
+project_dir = Path(__file__).parent
 
 with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
@@ -17,7 +22,7 @@ setuptools.setup(
     author_email='david@stanka.de',
     description='OPT processing for OPTac data',
     keywords='optan, test',
-    long_description=long_description,
+    long_description=project_dir.joinpath("README.md").read_text(encoding="utf-8"),,
     long_description_content_type='text/markdown',
     url='https://github.com/palec87/optan',
     # project_urls={
@@ -28,8 +33,8 @@ setuptools.setup(
     #     # 'Funding': '',
     #     # 'Say Thanks!': '',
     # },
-    package_dir={'': '.'},
-    packages=setuptools.find_packages(where='.'),
+    packages=setuptools.find_packages(where="src"),
+    package_dir={"": "src"},
     classifiers=[
         # see https://pypi.org/classifiers/
         'Development Status :: 1 - Planning',
@@ -40,7 +45,7 @@ setuptools.setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.10',
-    # install_requires=['Pillow'],
+    install_requires=project_dir.joinpath("requirements.txt").read_text().split("\n"),
     extras_require={
         'dev': ['check-manifest'],
         # 'test': ['coverage'],

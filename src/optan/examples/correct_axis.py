@@ -6,20 +6,20 @@ You can also run the script after importing optan module for
 example like this:
 
 import optan as o
-o.correct_axis_rotation(folder_to_process)
+o.correct_axis(folder_to_process)
 """
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 
-from optan.src import optan
+from optan.main import Optan
 
 
 def main(folder):
     print("Example how to load test data from '/data' directory.")
     # initialize Optan class
-    exp = optan.Optan()
+    exp = Optan()
     exp.set_file_format('jpg')
     exp.load_folder(folder)
 

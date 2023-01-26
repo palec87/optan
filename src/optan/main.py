@@ -151,7 +151,7 @@ class Optan():
         if self.data is None:
             print('No sinogram, calculatig one')
             self.calc_sinogram()
-        
+
         self.recon = tom.recon(self.data[:, imin:imax, :],
                                theta=self.theta,
                                center=self.center,
@@ -354,19 +354,6 @@ class Optan():
                 'st' + str(index[1]),
                 str(index[2]))
 
-    # def iradon(self, index: int):
-    #     # preallocation for the full sinogram
-    #     if self.sino is None:
-    #         print('No sinogram, calculatig one')
-    #         self.calc_sinogram()
-
-    #     self.theta = np.linspace(0., 360., self.n_steps, endpoint=False)
-    #     img = self.sino[:, index, :].transpose()
-    #     self.iradon = iradon(
-    #                     img,
-    #                     theta=self.theta,
-    #                     filter_name='ramp')
-
     def calc_sinogram(self):
         """
         If more frames_per step I take the first.
@@ -409,6 +396,6 @@ class Optan():
             self.sino = self.data[0]
 
 
-import types
-__all__ = [name for name, thing in globals().items()
-           if not (name.startswith('_') or isinstance(thing, types.ModuleType))]
+# import types
+# __all__ = [name for name, thing in globals().items()
+#            if not (name.startswith('_') or isinstance(thing, types.ModuleType))]

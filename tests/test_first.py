@@ -1,6 +1,6 @@
 import pytest
 from optan.examples import (
-    load_data_example
+    load_data
 )
 
 
@@ -14,5 +14,5 @@ def test_raises():
 
 
 def test_examples():
-    ret = load_data_example.main()
-    assert ret == 'number one'
+    ret = load_data.main()
+    assert ret == 'finished'
