@@ -22,7 +22,7 @@ setuptools.setup(
     author_email='david@stanka.de',
     description='OPT processing for OPTac data',
     keywords='optan, test',
-    long_description=project_dir.joinpath("README.md").read_text(),
+    long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/palec87/optan',
     # project_urls={
