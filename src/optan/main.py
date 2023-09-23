@@ -18,23 +18,26 @@ __license__ = 'GPL'
 import numpy as np
 import json
 import os
+import itertools # noqa
 from PIL import Image
 import matplotlib.pyplot as plt
-from skimage.transform import iradon, iradon_sart
-# import cv2
+from skimage.transform import iradon, iradon_sart  # noqa
 import tomopy as tom
+from data_class import Opt
 
 
-class Optan():
-    def __init__(self, folder=None) -> None:
+class Optan(Opt):
+    def __init__(self, folder, depth, format) -> None:
+        super().__init__(folder, depth, format)
         self.n_sweeps = None
         self.n_steps = None
         self.images_per_step = None
         self.data = None  # derived from raw data with operations, 3d nd.array
         self.data_list = []  # annotation if data list of arrays
         self.raw_data = None  # organized into a dict
-        self.file_format = None
-        self.image_format = None
+
+        # check where this appears and replace with self.depth
+        self.dtype = None
 
         # this should be another class Recon
         self.theta = None
@@ -42,16 +45,6 @@ class Optan():
         self.center = None
         self.recon = None
         self.recon_log = {}
-        self.formats = ['jpg', 'jpeg', 'tiff', 'bmp']
-        if folder is not None:
-            try:
-                self.set_folder(folder)
-            except FileNotFoundError:
-                print('setting folder to None, use .set_folder(path) to\
-                    init existing folder')
-                folder = None
-        else:
-            folder = None
 
         # for each of these atributes, there is a method
         # to set a value by a user
@@ -59,38 +52,25 @@ class Optan():
             'n_sweeps',
             'n_steps',
             'images_per_step',
-            'file_type'
-            'image_format',
+            'file_format'
+            'dtype',
             ]
-
-    def set_folder(self, path: str) -> None:
-        """Set folder path, where the data is.
-
-        Args:
-            path (str): OS dependent path
-
-        Raises:
-            FileNotFoundError: raised if path does
-            not exist
-        """
-        if os.path.exists(path):
-            self.folder = path
-        else:
-            raise FileNotFoundError('Non-existent path.')
 
     def average_raw_data(self, sweeps='all', frames='all'):
         # preallocation
-        self.data = np.zeros((self.n_steps, *self.current_image.shape))
+        self.data = np.zeros((self.n_steps, *self.current_image.shape),
+                             dtype=np.int16,)
         if sweeps == 'all':
             if frames == 'all':
                 arr = np.zeros(
                         (self.n_sweeps * self.images_per_step,
                          *self.current_image.shape),
+                        dtype=np.int16,
                 )
                 for i in range(self.n_steps):
                     for j in range(self.n_sweeps):
                         for k in range(self.images_per_step):
-                            arr[k*(j+1), :] = self.single_frame_from_raw((j, i, k))
+                            arr[k*(j+1), :] = self.single_frame_from_raw((j, i, k)) # noqa: 501
                     self.data[i, :] = np.mean(arr, axis=0)
                 self.data_list = []
             elif frames == 'none':
@@ -104,17 +84,31 @@ class Optan():
                 arr = np.zeros(
                             (self.n_sweeps * len(iterator),
                              *self.current_image.shape),
+                            dtype=np.int16,
                             )
                 for i in range(self.n_steps):
                     for j in range(self.n_sweeps):
                         for k in range(len(iterator)):
-                            arr[k*(j+1), :] = self.single_frame_from_raw((j, i, iterator[k]))
+                            arr[k*(j+1), :] = self.single_frame_from_raw(
+                                                        (j, i, iterator[k]),
+                                                        )
                     self.data[i, :] = np.mean(arr, axis=0)
                 self.data_list = []
 
         elif sweeps == ' none':
             raise NotImplementedError
 
+    #########################
+    # Sklearn ###############
+    #########################
+    def recon_iradon(self, idx: int):
+        self.recon = iradon(self.sino[idx],
+                            theta=self.theta,
+                            filter_name='ramp')
+
+    #########################
+    # TOMOPY stuff ##########
+    # #######################
     def find_center(self, idx: int):
         """
         Wrapper for the tomopy.find_center_vo() method.
@@ -165,7 +159,9 @@ class Optan():
             list: list of method names
         """
         method_list = [
-            attr for attr in dir(self) if callable(getattr(self, attr)) and attr.startswith('__') is False]
+            attr for attr in dir(self)
+            if callable(getattr(self, attr))
+            and attr.startswith('__') is False]
         print(method_list)
         return method_list
 
@@ -183,7 +179,7 @@ class Optan():
         else:
             print(self.__dict__.keys())
 
-    def load_folder(self, folder=None):
+    def load_folder(self, depth=np.int16, folder=None):
         """
         Load folder containing Optac experimental data including
         metadata
@@ -194,6 +190,7 @@ class Optan():
         """
         if folder:
             self.folder = folder
+        self.depth = depth
         self.load_metadata()
         self.load_files()
 
@@ -210,19 +207,38 @@ class Optan():
         """
         self.raw_data = {}
         # loading
-        for sweep in range(self.n_sweeps):
-            self.raw_data['sw'+str(sweep)] = {}
-            for step in range(self.n_steps):
-                self.raw_data['sw'+str(sweep)]['st'+str(step)] = {}
-                for frame in range(self.images_per_step):
-                    self.raw_data['sw'+str(sweep)]['st'+str(step)][str(frame)] = {}
-                    fname = '_'.join(
-                                [str(sweep), str(step), str(frame)])
-                    self.raw_data[
-                        'sw'+str(sweep)][
-                            'st'+str(step)][
-                                str(frame)] = self.load_single_frame(fname)
-        self.current_image = self.raw_data['sw0']['st0']['0']
+        try:
+            for sweep in range(self.n_sweeps):
+                self.raw_data['sw'+str(sweep)] = {}
+                for step in range(self.n_steps):
+                    self.raw_data['sw'+str(sweep)]['st'+str(step)] = {}
+                    for frame in range(self.images_per_step):
+                        self.raw_data['sw'+str(sweep)]['st'+str(step)][str(frame)] = {} # noqa: 501
+                        fname = '_'.join(
+                                    [str(sweep), str(step), str(frame)])
+                        self.raw_data[
+                            'sw'+str(sweep)][
+                                'st'+str(step)][
+                                    str(frame)] = self.load_single_frame(fname)
+            self.current_image = self.raw_data['sw0']['st0']['0']
+        except FileNotFoundError:
+            print('Dataset is not step-wise acquired. Trying continuous.')
+            # first list files
+            files = [file for file in self.folder.iterdir()
+                     if file.name.endswith(self.file_format)]
+
+            # load first one for preallocation
+            f0 = np.array(Image.open(files[0]), dtype=self.depth)
+            # preallocate
+            data = np.empty((len(files), *f0.shape), dtype=self.depth)
+            for i in range(len(files)):
+                # construct fname
+                fname = f'{i:04d}.{self.file_format}'
+                # load data
+                data[i] = np.array(Image.open(self.folder.joinpath(fname)),
+                                   dtype=self.depth)
+                print(i, end='\r')
+            self.data = data
 
     def load_metadata(self):
         """
@@ -247,7 +263,7 @@ class Optan():
         anticlock
 
         Args:
-            direction (str, optional): Either clock or anticlock. 
+            direction (str, optional): Either clock or anticlock.
                 Defaults to 'clock'.
 
         Raises:
@@ -279,21 +295,6 @@ class Optan():
         file_path = os.path.join(self.folder, fname + '.' + self.file_format)
         image = np.array(Image.open(file_path))
         return image
-
-    def set_file_format(self, value: str) -> None:
-        """
-        sets file format of the data images. It should be
-        part of experimental metadata
-
-        Args:
-            value (str): one of jpg, jpeg, tiff, bmp
-
-        Raises:
-            ValueError: If format none of the above
-        """
-        if value not in self.formats:
-            raise ValueError('Not supported file format. See .formats')
-        self.file_format = value
 
     def show_image_raw(self, index: tuple):
         """Display current image from the raw data
@@ -331,7 +332,8 @@ class Optan():
         plt.show()
 
     def show_image_sino(self, idx: int):
-        plt.imshow(self.sino[:, idx, :])
+        plt.imshow(np.rot90(self.sino[:, idx, :], k=-1),
+                   aspect='auto')
         plt.title(f'Sinogram at pixel: {idx}')
         plt.show()
 
@@ -397,4 +399,5 @@ class Optan():
 
 # import types
 # __all__ = [name for name, thing in globals().items()
-#            if not (name.startswith('_') or isinstance(thing, types.ModuleType))]
+#            if not (name.startswith('_')
+#            or isinstance(thing, types.ModuleType))]
