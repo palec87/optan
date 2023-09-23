@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>app &#8212; OPTan pre0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=039e1c02" />
+    <script src="../_static/documentation_options.js?v=0e7415d6"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OPTan" href="../optan.html" />
+    <link rel="prev" title="GUI" href="../app.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-app">
+<span id="app"></span><h1>app<a class="headerlink" href="#module-app" title="Link to this heading">¶</a></h1>
+<p>Following tomography acquisition with OPTac software, you
+can load, process, correct and analyze (to certain extend) your
+tomographs with OPTan.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.main" title="app.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#app.Gui" title="app.Gui"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Gui</span></code></a>(init_values_file)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="app.Gui">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">Gui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_values_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._folder_load_go">
+<span class="sig-name descname"><span class="pre">_folder_load_go</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._folder_load_go" title="Link to this definition">¶</a></dt>
+<dd><p>Loads data into a single tuple of nd arrays.
+TODO: take care of the size of the directory</p>
+<p>Experimental metadata defines the data shape
+1. number of frames taken per frame
+2. Steps per sweep
+3. Number of sweeps</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._load_gui_values">
+<span class="sig-name descname"><span class="pre">_load_gui_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._load_gui_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._no_init_values">
+<span class="sig-name descname"><span class="pre">_no_init_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._no_init_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._save_gui_values">
+<span class="sig-name descname"><span class="pre">_save_gui_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._save_gui_values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_avg_frames">
+<span class="sig-name descname"><span class="pre">_update_avg_frames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_avg_frames" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_avg_sweeps">
+<span class="sig-name descname"><span class="pre">_update_avg_sweeps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_avg_sweeps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_deg_collected">
+<span class="sig-name descname"><span class="pre">_update_deg_collected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_deg_collected" title="Link to this definition">¶</a></dt>
+<dd><p>Either experiment collects 180 or full 360 degree
+angles.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_folder_path">
+<span class="sig-name descname"><span class="pre">_update_folder_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_folder_path" title="Link to this definition">¶</a></dt>
+<dd><p>Update saving folder path from UI</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_frame_slider">
+<span class="sig-name descname"><span class="pre">_update_frame_slider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_frame_slider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_max_idx">
+<span class="sig-name descname"><span class="pre">_update_max_idx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_max_idx" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_min_idx">
+<span class="sig-name descname"><span class="pre">_update_min_idx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_min_idx" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_sat_slider">
+<span class="sig-name descname"><span class="pre">_update_sat_slider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_sat_slider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_step_slider">
+<span class="sig-name descname"><span class="pre">_update_step_slider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_step_slider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_sweep_slider">
+<span class="sig-name descname"><span class="pre">_update_sweep_slider</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_sweep_slider" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui._update_toggle_idx">
+<span class="sig-name descname"><span class="pre">_update_toggle_idx</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui._update_toggle_idx" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.append_history">
+<span class="sig-name descname"><span class="pre">append_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.append_history" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.create_plots">
+<span class="sig-name descname"><span class="pre">create_plots</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.create_plots" title="Link to this definition">¶</a></dt>
+<dd><p>defines defaults for each graph</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.current_frame_display">
+<span class="sig-name descname"><span class="pre">current_frame_display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.current_frame_display" title="Link to this definition">¶</a></dt>
+<dd><p>last frame plot in Align tab</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.exec_exit_btn">
+<span class="sig-name descname"><span class="pre">exec_exit_btn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.exec_exit_btn" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>will exit from gui. some safeguarding</dt><dd><p>in case exit is called before stop</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.folder_load_btn">
+<span class="sig-name descname"><span class="pre">folder_load_btn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.folder_load_btn" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.load_metadata">
+<span class="sig-name descname"><span class="pre">load_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.load_metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.load_single_frame">
+<span class="sig-name descname"><span class="pre">load_single_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.load_single_frame" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.replot">
+<span class="sig-name descname"><span class="pre">replot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.replot" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.saturate_frame">
+<span class="sig-name descname"><span class="pre">saturate_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.saturate_frame" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.set_current_frame">
+<span class="sig-name descname"><span class="pre">set_current_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">st</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.set_current_frame" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.update_data_idx">
+<span class="sig-name descname"><span class="pre">update_data_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tup</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.update_data_idx" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.update_frame_roi">
+<span class="sig-name descname"><span class="pre">update_frame_roi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.update_frame_roi" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="app.Gui.update_slider_ranges">
+<span class="sig-name descname"><span class="pre">update_slider_ranges</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.Gui.update_slider_ranges" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="app.main">
+<span class="sig-prename descclassname"><span class="pre">app.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">OPTan</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../app.html">GUI</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">app</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../optan.html">OPTan</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../app.html">GUI</a><ul>
+      <li>Previous: <a href="../app.html" title="previous chapter">GUI</a></li>
+      <li>Next: <a href="../optan.html" title="next chapter">OPTan</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, David Palecek.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/generated/app.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
